@@ -1,15 +1,41 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        User user = new User();
+        UserDataBase userDataBase = new UserDataBase();
+        Scanner scannerText = new Scanner(System.in);
+        Scanner scannerNum = new Scanner(System.in);
+        while (true) {
+            System.out.println("керектуу номерди танданыз!!!");
+            System.out.println("1. Каттоо.    Register");
+            System.out.println("2. Кирүү      Login");
+            System.out.println("3. Чыгyy.     Exit");
+            System.out.print("Тандаңыз: ");
+            int choice = scannerNum.nextInt();
+
+            switch (choice) {
+                case 1 -> {
+                    User register = user.Register(scannerText);
+                    userDataBase.addLogin(register);
+                }
+                case 2 -> {
+                    if (userDataBase.getUsers() != null) {
+                        userDataBase.loginUser(scannerNum);
+                    }else {
+                        System.out.println("сизде аккаун сакталбаган");
+                    }
+
+                }
+                case 3 -> {
+                    return;
+                }
+                default -> {
+
+                }
+            }
         }
     }
 }
