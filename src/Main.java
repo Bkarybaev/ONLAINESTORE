@@ -27,13 +27,12 @@ public class Main {
                     }else {
                         userDataBase.loginUser(scannerNum);
                     }
-
                 }
                 case 3 -> {
                     return;
                 }
                 default -> {
-
+                    System.out.println("туура эмес тандоо!d");
                 }
             }
         }

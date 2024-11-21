@@ -11,4 +11,8 @@ public class Book extends Product{
         super(name, description, price, createdAt);
         this.authorFullName = authorFullName;
     }
+
+    public String getAuthorFullName() {
+        return authorFullName;
+    }
 }
