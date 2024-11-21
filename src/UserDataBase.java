@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class UserDataBase {
     private User[] users = new User[0];
 
+    ProductDataBase productDataBase = new ProductDataBase();
+
     public UserDataBase() {
     }
 
@@ -51,13 +53,20 @@ public class UserDataBase {
                             return;
                         }
                         case 1 -> {
-                            System.out.println("1. add Device");
-                            System.out.println("2. add Book");
-                            System.out.print("Тандаңыз: ");
-                            int choice = scanner.nextInt();
-                            switch (choice){
-                                case 1 -> {
+                            while (true) {
+                                System.out.println("1. add Device");
+                                System.out.println("2. add Book");
+                                System.out.println("0. Logout              Чыгуу");
+                                System.out.print("Тандаңыз: ");
+                                int choice = scanner.nextInt();
+                                switch (choice) {
+                                    case 1 -> {
+                                       Device newDevice = productDataBase.addDevise(scanner);
+                                       productDataBase.addDevise(newDevice);
+                                    }
+                                    case 0 -> {
 
+                                    }
                                 }
                             }
                         }

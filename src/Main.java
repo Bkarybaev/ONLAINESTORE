@@ -9,7 +9,7 @@ public class Main {
         Scanner scannerText = new Scanner(System.in);
         Scanner scannerNum = new Scanner(System.in);
         while (true) {
-            System.out.println("керектуу номерди танданыз!!!");
+            System.out.println("керектуу команданы танданыз");
             System.out.println("1. Каттоо.    Register");
             System.out.println("2. Кирүү      Login");
             System.out.println("3. Чыгyy.     Exit");
@@ -22,10 +22,10 @@ public class Main {
                     userDataBase.addLogin(register);
                 }
                 case 2 -> {
-                    if (userDataBase.getUsers() != null) {
-                        userDataBase.loginUser(scannerNum);
+                    if (userDataBase.getUsers().length == 0) {
+                        System.out.println("сиз алгач катталуунуз керек!");
                     }else {
-                        System.out.println("сизде аккаун сакталбаган");
+                        userDataBase.loginUser(scannerNum);
                     }
 
                 }
