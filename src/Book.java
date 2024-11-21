@@ -7,7 +7,7 @@ public class Book extends Product{
     public Book() {
     }
 
-    public Book(String name, String description, BigDecimal price, LocalDate createdAt, String authorFullName) {
+    public Book(String name, String description, String price, LocalDate createdAt, String authorFullName) {
         super(name, description, price, createdAt);
         this.authorFullName = authorFullName;
     }

@@ -6,12 +6,12 @@ public class Device extends Product{
     private String color;
     private String isNew;
     private String memory;
-    private BigDecimal price;
+    private String price;
 
     public Device() {
     }
 
-    public Device(String brand, String color, String isNew, String memory,BigDecimal price) {
+    public Device(String brand, String color, String isNew, String memory,String price) {
         this.brand = brand;
         this.color = color;
         this.isNew = isNew;
@@ -19,7 +19,7 @@ public class Device extends Product{
         this.price = price;
     }
 
-    public Device(String name, String description, BigDecimal price, LocalDate createdAt, String brand, String color, String isNew, String memory) {
+    public Device(String name, String description, String price, LocalDate createdAt, String brand, String color, String isNew, String memory) {
         super(name, description, price, createdAt);
         this.brand = brand;
         this.color = color;

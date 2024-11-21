@@ -4,13 +4,13 @@ import java.time.LocalDate;
 public abstract class Product {
     private String name;
     private String description;
-    private BigDecimal price;
+    private String price;
     private LocalDate createdAt;
 
     public Product() {
     }
 
-    public Product(String name, String description, BigDecimal price, LocalDate createdAt) {
+    public Product(String name, String description, String price, LocalDate createdAt) {
         this.name = name;
         this.description = description;
         this.price = price;

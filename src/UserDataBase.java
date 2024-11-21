@@ -28,14 +28,14 @@ public class UserDataBase {
         System.out.println("сиздин акаунт:");
         int j = 1;
         for (User user : getUsers()) {
-            System.out.println("\n"+j + ". " + user.getEmail()+"\n");
+            System.out.println("\n" + j + ". " + user.getEmail() + "\n");
             j++;
         }
         System.out.println("0. Logout              Чыгуу");
 
         System.out.print("танданыз : ");
         int userLogin = scanner.nextInt();
-        if (userLogin==0){
+        if (userLogin == 0) {
             return;
         }
         for (int i = 1; i <= users.length; i++) {
@@ -53,28 +53,33 @@ public class UserDataBase {
                             return;
                         }
                         case 1 -> {
-                            while (true) {
-                                System.out.println("1. add Device");
-                                System.out.println("2. add Book");
-                                System.out.println("0. Logout              Чыгуу");
-                                System.out.print("Тандаңыз: ");
-                                int choice = scanner.nextInt();
-                                switch (choice) {
-                                    case 1 -> {
-                                       Device newDevice = productDataBase.addDevise(scanner);
-                                       productDataBase.addDevise(newDevice);
-                                    }
-                                    case 0 -> {
-
-                                    }
-                                }
-                            }
+                            addDevice();
                         }
                     }
                 }
             }
         }
 
+    }
+
+    public void addDevice() {
+        while (true) {
+            System.out.println("\n1. add Device");
+            System.out.println("2. add Book");
+            System.out.println("0. артка кайтуу\n");
+            System.out.print("Тандаңыз: ");
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1 -> {
+                    Device newDevice = productDataBase.addDevise();
+                    productDataBase.addDevise(newDevice);
+                }
+                case 0 -> {
+                    return;
+                }
+            }
+        }
     }
 
 

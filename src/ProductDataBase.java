@@ -30,26 +30,54 @@ public class ProductDataBase {
         devices = Arrays.copyOf(devices, devices.length + 1);
         devices[devices.length - 1] = devise;
     }
+
+
     String brand;
     String color;
     String isNew;
     String memory;
-    BigDecimal price;
-    public Device addDevise(Scanner scanner) {
+    String price;
+
+    public Device addDevise() {
+        while (true) {
             System.out.print("Brand Devise : ");
-            brand = scanner.nextLine();
-
+            brand = new Scanner(System.in).nextLine();
+            if (brand != null) {
+                break;
+            }
+        }
+        while (true) {
             System.out.print("Color : ");
-            color = scanner.nextLine();
+            color = new Scanner(System.in).nextLine();
+            if (color != null) {
+                break;
+            }
+        }
 
+        while (true) {
             System.out.print("is new : ");
-            isNew = scanner.nextLine();
-
+            isNew = new Scanner(System.in).nextLine();
+            if (isNew != null) {
+                break;
+            }
+        }
+        while (true){
             System.out.print("Memory : ");
-            memory = scanner.nextLine();
-
+            memory = new Scanner(System.in).nextLine();
+            if (memory != null) {
+                break;
+            }
+        }
+        while (true){
             System.out.print("Price : ");
-            price = new Scanner(System.in).nextBigDecimal();
+            price = new Scanner(System.in).nextLine();
+            if (price != null) {
+                break;
+            }
+        }
+
+
+
 
 
 
