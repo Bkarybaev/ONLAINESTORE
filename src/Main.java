@@ -29,6 +29,7 @@ public class Main {
                     }
                 }
                 case 3 -> {
+                    System.out.println("программа жабылууда...");
                     return;
                 }
                 default ->

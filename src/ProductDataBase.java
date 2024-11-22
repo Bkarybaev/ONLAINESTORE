@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class ProductDataBase {
+     private User[] userDataBase;
     private Device[] devices = new Device[0];
     private Book[] books = new Book[0];
 
-    public ProductDataBase() {
+    public ProductDataBase(User[] userDataBase) {
+        this.userDataBase = userDataBase;
     }
 
 
@@ -27,14 +29,26 @@ public class ProductDataBase {
         this.books = books;
     }
 
-    public void addDevise(Device devise) {
-        devices = Arrays.copyOf(devices, devices.length + 1);
-        devices[devices.length - 1] = devise;
+    public void addDevise(Device devise, String password) {
+        for (User user : userDataBase) {
+            if (user.getPassword().equalsIgnoreCase(password)) {
+//                devices = Arrays.copyOf(devices, devices.length + 1);
+//                devices[devices.length - 1] = devise;
+                user.addProduct(devise);
+            }
+        }
+
+
     }
 
-    public void addBook(Book book) {
-        books = Arrays.copyOf(books, books.length + 1);
-        books[books.length - 1] = book;
+    public void addBook(Book book,String password) {
+        for (User user : userDataBase) {
+//            books = Arrays.copyOf(books, books.length + 1);
+//            books[books.length - 1] = book;
+            user.addProduct(book);
+        }
+
+
     }
 
     String brand;
@@ -92,19 +106,19 @@ public class ProductDataBase {
         LocalDate createdAt;
         String authorName;
 
-        System.out.println("китептин атын жазыныз : ");
+        System.out.print("китептин атын жазыныз : ");
         name = scanner.nextLine();
 
-        System.out.println("описания калтырыныз : ");
+        System.out.print("описания калтырыныз : ");
         description = scanner.nextLine();
 
-        System.out.println("баасын киргизиниз : ");
+        System.out.print("баасын киргизиниз : ");
         price = scanner.nextLine();
 
-        System.out.println("качан жуктолгон убактысы : " + LocalDate.now());//todo avtomat
+        System.out.println("качан жуктолгон убактысы : " + LocalDate.now());
         createdAt = LocalDate.now();
 
-        System.out.println("атордун аты - жону : ");
+        System.out.print("атордун аты - жону : ");
         authorName = scanner.nextLine();
 
         return new Book(name,description,price,createdAt,authorName);

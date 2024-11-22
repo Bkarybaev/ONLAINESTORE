@@ -6,7 +6,8 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private Product[] products;
+    private Device[] products = new Device[0];
+    private Book[] products1 = new Book[0];
 
 
     public User() {
@@ -19,9 +20,7 @@ public class User {
         this.password = password;
     }
 
-    public User(Product[] products) {
-        this.products = products;
-    }
+
 
     public String getFirstName() {
         return firstName;
@@ -59,8 +58,14 @@ public class User {
         return products;
     }
 
-    public void setProducts(Product[] products) {
-        this.products = products;
+
+    public void addProduct(Book product){
+        products1 = Arrays.copyOf(products1, products1.length+1);
+        products1[products1.length-1] = product;
+    }
+    public void addProduct(Device product){
+        products = Arrays.copyOf(products, products.length+1);
+        products[products.length-1] = product;
     }
 
     public User Register(Scanner scanner) {
