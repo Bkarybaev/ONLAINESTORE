@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -80,7 +79,11 @@ public class UserDataBase {
                 case 1 -> {
                     Device newDevice = productDataBase.addDevise();
                     productDataBase.addDevise(newDevice);
-                }//todo 2 number add book
+                }
+                case 2 ->{
+                    Book book = productDataBase.addBook();
+                    productDataBase.addBook(book);
+                }
 
                 case 0 -> {
                     return;

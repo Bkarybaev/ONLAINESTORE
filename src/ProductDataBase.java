@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -31,6 +32,10 @@ public class ProductDataBase {
         devices[devices.length - 1] = devise;
     }
 
+    public void addBook(Book book) {
+        books = Arrays.copyOf(books, books.length + 1);
+        books[books.length - 1] = book;
+    }
 
     String brand;
     String color;
@@ -61,31 +66,50 @@ public class ProductDataBase {
                 break;
             }
         }
-        while (true){
+        while (true) {
             System.out.print("Memory : ");
             memory = new Scanner(System.in).nextLine();
             if (memory != null) {
                 break;
             }
         }
-        while (true){
+        while (true) {
             System.out.print("Price : ");
             price = new Scanner(System.in).nextLine();
             if (price != null) {
                 break;
             }
         }
-
-
-
-
-
-
         return new Device(brand, color, isNew, memory, price);
 
     }
 
+    public Book addBook() {
+        Scanner scanner = new Scanner(System.in);
+        String name;
+        String description;
+        String price;
+        LocalDate createdAt;
+        String authorName;
 
+        System.out.println("китептин атын жазыныз : ");
+        name = scanner.nextLine();
+
+        System.out.println("описания калтырыныз : ");
+        description = scanner.nextLine();
+
+        System.out.println("баасын киргизиниз : ");
+        price = scanner.nextLine();
+
+        System.out.println("качан жуктолгон убактысы : " + LocalDate.now());//todo avtomat
+        createdAt = LocalDate.now();
+
+        System.out.println("атордун аты - жону : ");
+        authorName = scanner.nextLine();
+
+        return new Book(name,description,price,createdAt,authorName);
+
+    }
 
 
 }

@@ -31,10 +31,11 @@ public class Main {
                 case 3 -> {
                     return;
                 }
-                default -> {
+                default ->
                     System.out.println("туура эмес тандоо!d");
-                }
+
             }
         }
     }
+
 }
