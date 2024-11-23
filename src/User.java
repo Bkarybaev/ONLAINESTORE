@@ -6,8 +6,8 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private Device[] products = new Device[0];
-    private Book[] products1 = new Book[0];
+    private Device[] devices = new Device[0];
+    private Book[] books = new Book[0];
 
 
     public User() {
@@ -20,6 +20,21 @@ public class User {
         this.password = password;
     }
 
+    public Device[] getDevices() {
+        return devices;
+    }
+
+    public void setDevices(Device[] devices) {
+        this.devices = devices;
+    }
+
+    public Book[] getBooks() {
+        return books;
+    }
+
+    public void setBooks(Book[] books) {
+        this.books = books;
+    }
 
 
     public String getFirstName() {
@@ -54,26 +69,23 @@ public class User {
         this.password = password;
     }
 
-    public Product[] getProducts() {
-        return products;
+
+    public void addProduct(Book product) {
+        books = Arrays.copyOf(books, books.length + 1);
+        books[books.length - 1] = product;
     }
 
-
-    public void addProduct(Book product){
-        products1 = Arrays.copyOf(products1, products1.length+1);
-        products1[products1.length-1] = product;
-    }
-    public void addProduct(Device product){
-        products = Arrays.copyOf(products, products.length+1);
-        products[products.length-1] = product;
+    public void addProduct(Device product) {
+        devices = Arrays.copyOf(devices, devices.length + 1);
+        devices[devices.length - 1] = product;
     }
 
     public User Register(Scanner scanner) {
 
-        String firsName1 ;
-        String lastName1 ;
-        String emil ;
-        String pass ;
+        String firsName1;
+        String lastName1;
+        String emil;
+        String pass;
         while (true) {
             System.out.print("атынызды жазыныз : ");
             String firsName = scanner.nextLine();
@@ -117,6 +129,6 @@ public class User {
             }
         }
         System.out.println("ийгиликтуу катталды!!!");
-        return   new User(firsName1,lastName1,emil,pass);
+        return new User(firsName1, lastName1, emil, pass);
     }
 }

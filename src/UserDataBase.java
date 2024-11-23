@@ -5,7 +5,7 @@ public class UserDataBase {
     private User[] users = new User[0];
     String password;
 
-    ProductDataBase productDataBase = new ProductDataBase(users);
+    ProductDataBase productDataBase = new ProductDataBase();
 
     public UserDataBase() {
     }
@@ -29,7 +29,7 @@ public class UserDataBase {
         System.out.println("сиздин акаунт:");
         int j = 1;
         for (User user : getUsers()) {
-            System.out.println("\n" + j + ". " + user.getEmail() + "\n");
+            System.out.println(j + ". " + user.getEmail() + "\n");
             j++;
         }
         System.out.println("0. Logout              Чыгуу");
@@ -39,37 +39,40 @@ public class UserDataBase {
         if (userLogin == 0) {
             return;
         }
-
-        for (int i = 1; i <= users.length; i++) {
-            if (userLogin == i) {
-                System.out.println("Password : ");
-                 password = scanner.nextLine();
-                for (User user : users) {
-                    if (user.getPassword().equals(password)) {
-                        while (true) {
-                            System.out.println("0. Logout              Чыгуу");
-                            System.out.println("1. Add new Product     Жаңы продукт кошуңуз");
-                            System.out.println("2. Get all Products    Бардык продукталарды алыңыз");
-                            System.out.println("3. Get all Book        Бардык китепти алыңыз");
-                            System.out.println("4. Get all Device.     Бардык устройстволарды алыңыз");
-                            System.out.print("Тандаңыз: ");
-                            int command = scanner.nextInt();
-                            switch (command) {
-                                case 0 -> {
-                                    return;
-                                }
-                                case 1 -> addDevice();
-                                case 2 -> getAllProducts(productDataBase.getDevices(), productDataBase.getBooks());
-                                case 3 -> getAllBooks(productDataBase.getBooks());
-                                case 4 -> getAllDevice(productDataBase.getDevices());
-                                default -> System.out.println("туура эмес тандоо!");
-                            }
-                        }
-                    }
-                    System.out.println("Invalid password!!!");
-                }
+        while (true) {
+            System.out.println("Password : ");
+            this.password = new Scanner(System.in).nextLine();
+            if (password != null) {
+                break;
             }
         }
+
+        for (User user : users) {
+            if (user.getPassword().equals(password)) {
+                while (true) {
+                    System.out.println("0. Logout              Чыгуу");
+                    System.out.println("1. Add new Product     Жаңы продукт кошуңуз");
+                    System.out.println("2. Get all Products    Бардык продукталарды алыңыз");
+                    System.out.println("3. Get all Book        Бардык китепти алыңыз");
+                    System.out.println("4. Get all Device.     Бардык устройстволарды алыңыз");
+                    System.out.print("Тандаңыз: ");
+                    int command = scanner.nextInt();
+                    switch (command) {
+                        case 0 -> {
+                            password = null;
+                            return;
+                        }
+                        case 1 -> addDevice();
+                        case 2 -> getAllProducts();
+                        case 3 -> getAllBooks();
+                        case 4 -> getAllDevice();
+                        default -> System.out.println("туура эмес тандоо!");
+                    }
+                }
+            }
+
+        }
+            System.out.println("Invalid password!!!");
     }
 
     public void addDevice() {
@@ -83,11 +86,11 @@ public class UserDataBase {
             switch (choice) {
                 case 1 -> {
                     Device newDevice = productDataBase.addDevise();
-                    productDataBase.addDevise(newDevice,password);
+                    addDevise(newDevice, password);
                 }
                 case 2 -> {
                     Book book = productDataBase.addBook();
-                    productDataBase.addBook(book,password);
+                    addBook(book, password);
                 }
 
                 case 0 -> {
@@ -97,43 +100,74 @@ public class UserDataBase {
         }
     }
 
-    public void getAllProducts(Device[] devices, Book[] books) {
-        for (Device device : devices) {
-            System.out.println("Brand : " + device.getBrand());
-            System.out.println("Color : " + device.getColor());
-            System.out.println("Is new : " + device.getIsNew());
-            System.out.println("Memory : " + device.getMemory());
-            System.out.println("Price $ : " + device.getPrice() + "\n");
+    public void getAllProducts() {
+        System.out.println("hello  ");
+        for (User user : users) {
+            if (user.getPassword().equals(password)) {
+                for (Device device : user.getDevices()) {
+                    System.out.println("Brand : " + device.getBrand());
+                    System.out.println("Color : " + device.getColor());
+                    System.out.println("Is new : " + device.getIsNew());
+                    System.out.println("Memory : " + device.getMemory());
+                    System.out.println("Price $ : " + device.getPrice() + "\n");
+                }
+                for (Book book : user.getBooks()) {
+                    System.out.println("name : " + book.getName());
+                    System.out.println("description : " + book.getDescription());
+                    System.out.println("price : " + book.getPrice());
+                    System.out.println("createdAt : " + book.getCreatedAt());
+                    System.out.println("authorFullName : " + book.getAuthorFullName() + "\n");
+                }
+            }
         }
-        for (Book book : books) {
-            System.out.println("name : " + book.getName());
-            System.out.println("description : " + book.getDescription());
-            System.out.println("price : " + book.getPrice());
-            System.out.println("createdAt : " + book.getCreatedAt());
-            System.out.println("authorFullName : " + book.getAuthorFullName() + "\n");
+
+
+    }
+
+    public void getAllBooks() {
+        for (User user : users) {
+            if (user.getPassword().equals(password)) {
+                for (Book book : user.getBooks()) {
+                    System.out.println("name : " + book.getName());
+                    System.out.println("description : " + book.getDescription());
+                    System.out.println("price : " + book.getPrice());
+                    System.out.println("createdAt : " + book.getCreatedAt());
+                    System.out.println("authorFullName : " + book.getAuthorFullName() + "\n");
+                }
+            }
         }
 
     }
 
-    public void getAllBooks(Book[] books) {
-        for (Book book : books) {
-            System.out.println("name : " + book.getName());
-            System.out.println("description : " + book.getDescription());
-            System.out.println("price : " + book.getPrice());
-            System.out.println("createdAt : " + book.getCreatedAt());
-            System.out.println("authorFullName : " + book.getAuthorFullName() + "\n");
+    public void getAllDevice() {
+        for (User user : users) {
+            if (user.getPassword().equals(password)) {
+                for (Device device : user.getDevices()) {
+                    System.out.println("Brand : " + device.getBrand());
+                    System.out.println("Color : " + device.getColor());
+                    System.out.println("Is new : " + device.getIsNew());
+                    System.out.println("Memory : " + device.getMemory());
+                    System.out.println("Price $ : " + device.getPrice() + "\n");
+                }
+            }
+        }
+
+    }
+    public void addDevise(Device devise, String password) {
+        for (User user : users) {
+            if (user.getPassword().equalsIgnoreCase(password)) {
+                user.addProduct(devise);
+            }
+        }
+    }
+    public void addBook(Book book,String password) {
+        for (User user : users) {
+            if (user.getPassword().equalsIgnoreCase(password)) {
+                user.addProduct(book);
+            }
         }
     }
 
-    public void getAllDevice(Device[] devices) {
-        for (Device device : devices) {
-            System.out.println("Brand : " + device.getBrand());
-            System.out.println("Color : " + device.getColor());
-            System.out.println("Is new : " + device.getIsNew());
-            System.out.println("Memory : " + device.getMemory());
-            System.out.println("Price $ : " + device.getPrice() + "\n");
-        }
-    }
 
 
 }

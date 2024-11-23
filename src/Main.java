@@ -23,7 +23,7 @@ public class Main {
                 }
                 case 2 -> {
                     if (userDataBase.getUsers().length == 0) {
-                        System.out.println("сиз алгач катталуунуз керек!");
+                        System.out.println("сиз алгач катталуунуз керек !");
                     }else {
                         userDataBase.loginUser(scannerNum);
                     }

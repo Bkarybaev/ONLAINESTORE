@@ -1,15 +1,12 @@
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class ProductDataBase {
-     private User[] userDataBase;
     private Device[] devices = new Device[0];
     private Book[] books = new Book[0];
 
-    public ProductDataBase(User[] userDataBase) {
-        this.userDataBase = userDataBase;
+    public ProductDataBase() {
+
     }
 
 
@@ -29,28 +26,6 @@ public class ProductDataBase {
         this.books = books;
     }
 
-    public void addDevise(Device devise, String password) {
-        for (User user : userDataBase) {
-            if (user.getPassword().equalsIgnoreCase(password)) {
-//                devices = Arrays.copyOf(devices, devices.length + 1);
-//                devices[devices.length - 1] = devise;
-                user.addProduct(devise);
-            }
-        }
-
-
-    }
-
-    public void addBook(Book book,String password) {
-        for (User user : userDataBase) {
-//            books = Arrays.copyOf(books, books.length + 1);
-//            books[books.length - 1] = book;
-            user.addProduct(book);
-        }
-
-
-    }
-
     String brand;
     String color;
     String isNew;
@@ -58,6 +33,7 @@ public class ProductDataBase {
     String price;
 
     public Device addDevise() {
+
         while (true) {
             System.out.print("Brand Devise : ");
             brand = new Scanner(System.in).nextLine();
