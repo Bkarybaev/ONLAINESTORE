@@ -7,7 +7,8 @@ public class Device extends Product{
     private String isNew;
     private String memory;
     private String price;
-
+    private static int a= getCount();
+//    private long id;
     public Device() {
     }
 
@@ -17,6 +18,9 @@ public class Device extends Product{
         this.isNew = isNew;
         this.memory = memory;
         this.price = price;
+//        this.id = a++;
+        super.setId(a++);
+        super.setCount(a++);
     }
 
     public Device(String name, String description, String price, LocalDate createdAt, String brand, String color, String isNew, String memory) {
@@ -66,4 +70,20 @@ public class Device extends Product{
     public void setPrice(String price) {
         this.price = price;
     }
+
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
+//
+//    public static int getA() {
+//        return a;
+//    }
+//
+//    public static void setA(int a) {
+//        Device.a = a;
+//    }
 }

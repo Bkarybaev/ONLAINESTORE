@@ -6,6 +6,8 @@ public abstract class Product {
     private String description;
     private String price;
     private LocalDate createdAt;
+    private long id;
+    private static int count = 1;
 
     public Product() {
     }
@@ -15,12 +17,29 @@ public abstract class Product {
         this.description = description;
         this.price = price;
         this.createdAt = createdAt;
+        this.id = count++;
     }
 
     public Product(String name, String description,LocalDate createdAt) {
         this.name = name;
         this.description = description;
         this.createdAt = createdAt;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        Product.count = count;
     }
 
     public String getName() {

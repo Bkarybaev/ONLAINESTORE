@@ -40,15 +40,16 @@ public class UserDataBase {
             return;
         }
         while (true) {
-            System.out.println("Password : ");
+            System.out.print("Password : ");
             this.password = new Scanner(System.in).nextLine();
             if (password != null) {
                 break;
             }
         }
-
+        boolean isblok = false;
         for (User user : users) {
             if (user.getPassword().equals(password)) {
+                isblok = true;
                 while (true) {
                     System.out.println("0. Logout              Чыгуу");
                     System.out.println("1. Add new Product     Жаңы продукт кошуңуз");
@@ -59,7 +60,6 @@ public class UserDataBase {
                     int command = scanner.nextInt();
                     switch (command) {
                         case 0 -> {
-                            password = null;
                             return;
                         }
                         case 1 -> addDevice();
@@ -72,7 +72,9 @@ public class UserDataBase {
             }
 
         }
+        if (!isblok) {
             System.out.println("Invalid password!!!");
+        }
     }
 
     public void addDevice() {
@@ -92,7 +94,6 @@ public class UserDataBase {
                     Book book = productDataBase.addBook();
                     addBook(book, password);
                 }
-
                 case 0 -> {
                     return;
                 }
@@ -101,23 +102,27 @@ public class UserDataBase {
     }
 
     public void getAllProducts() {
-        System.out.println("hello  ");
         for (User user : users) {
             if (user.getPassword().equals(password)) {
+                if (user.getDevices() != (null))System.out.println("-_-_-_-_-_---Device---_-_-_-_-_-");
                 for (Device device : user.getDevices()) {
+                    System.out.println("id : " + device.getId());
                     System.out.println("Brand : " + device.getBrand());
                     System.out.println("Color : " + device.getColor());
                     System.out.println("Is new : " + device.getIsNew());
                     System.out.println("Memory : " + device.getMemory());
                     System.out.println("Price $ : " + device.getPrice() + "\n");
                 }
+                if (user.getBooks() != (null)) System.out.println("---------=== Book ===--------");
                 for (Book book : user.getBooks()) {
+                    System.out.println("id : " + book.getId());
                     System.out.println("name : " + book.getName());
                     System.out.println("description : " + book.getDescription());
                     System.out.println("price : " + book.getPrice());
                     System.out.println("createdAt : " + book.getCreatedAt());
                     System.out.println("authorFullName : " + book.getAuthorFullName() + "\n");
                 }
+                deleteById();
             }
         }
 
@@ -127,6 +132,8 @@ public class UserDataBase {
     public void getAllBooks() {
         for (User user : users) {
             if (user.getPassword().equals(password)) {
+                if (user.getBooks() != (null)) System.out.println("---------=== Book ===--------");
+
                 for (Book book : user.getBooks()) {
                     System.out.println("name : " + book.getName());
                     System.out.println("description : " + book.getDescription());
@@ -135,6 +142,7 @@ public class UserDataBase {
                     System.out.println("authorFullName : " + book.getAuthorFullName() + "\n");
                 }
             }
+            deleteById();
         }
 
     }
@@ -142,6 +150,7 @@ public class UserDataBase {
     public void getAllDevice() {
         for (User user : users) {
             if (user.getPassword().equals(password)) {
+                if (user.getDevices() != (null)) System.out.println("-_-_-_-_-_---Device---_-_-_-_-_-");
                 for (Device device : user.getDevices()) {
                     System.out.println("Brand : " + device.getBrand());
                     System.out.println("Color : " + device.getColor());
@@ -150,9 +159,11 @@ public class UserDataBase {
                     System.out.println("Price $ : " + device.getPrice() + "\n");
                 }
             }
+            deleteById();
         }
 
     }
+
     public void addDevise(Device devise, String password) {
         for (User user : users) {
             if (user.getPassword().equalsIgnoreCase(password)) {
@@ -160,7 +171,8 @@ public class UserDataBase {
             }
         }
     }
-    public void addBook(Book book,String password) {
+
+    public void addBook(Book book, String password) {
         for (User user : users) {
             if (user.getPassword().equalsIgnoreCase(password)) {
                 user.addProduct(book);
@@ -168,6 +180,36 @@ public class UserDataBase {
         }
     }
 
+    public void deleteById() {
+        System.out.println("0. Logout  - Чыгуу");
+        System.out.println("Delete Product(id)");
+        System.out.print("Тандаңыз: ");
+        int id = new Scanner(System.in).nextInt();
+        if (id == 0) return;
+        boolean isblok = false;
+        for (User user : users) {
+            for (int i = 0; i < user.getDevices().length; i++) {
+                if (id == user.getDevices()[i].getId()) {
+                    for (int i1 = i; i1 < user.getDevices().length - 1; i1++) {
+                        user.getDevices()[i1] = user.getDevices()[i1 + 1];
+                        System.out.println("deleted id = " + id + " !!");
+                    }
+                }
+            }
+            user.setDevices(Arrays.copyOf(user.getDevices(), user.getDevices().length - 1));
+            for (int i = 0; i < user.getBooks().length; i++) {
+                if (id == user.getBooks()[i].getId()) {
+                    for (int i1 = i; i1 < user.getBooks().length - 1; i1++) {
+                        user.getBooks()[i1] = user.getBooks()[i1 + 1];
+                        System.out.println("deleted id = " + id + " !!");
+                    }
+                }
+            }
+            user.setBooks(Arrays.copyOf(user.getBooks(), user.getBooks().length - 1));
+        }
+
+        if (!isblok) System.out.println("not faunt id " + id + " !!!");
+    }
 
 
 }
